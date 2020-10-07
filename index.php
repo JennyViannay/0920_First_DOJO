@@ -1,17 +1,18 @@
 <?php
-
 // Ecrire la fonction getLike() qui prend en paramètre un array et qui return une string
-function getLike()
-{
-    // RAPPEL : Les messages suivants doivent s'afficher 
-    // selon s'il y a 0, 1, 2, ou supérieur à 2 users dans le tableaux d'entrée 
-    // OK "Soyez le premier à aimer cette publication" = 0 
-    // OK "Simon aime cette publication" = 1 
-    // ---------------------------------------------------
-    // "Simon et Arthur aiment cette publication" = 2 
-    // "Simon et X autres personnes ont aimé cette publication." > 2 
+function getLike(array $array): string {
+    if(count($array) === 0){
+        return 'Soyez le premier à aimer cette publication';
+    } elseif(count($array) === 1){
+        return $array[0]. ' aime cette publication '; 
+    } elseif(count($array) === 2){
+        return $array[0] . ' et ' . $array[1] . ' aiment cette publication '; 
+    } elseif(count($array) > 2) {
+        $random = array_rand($array);
+        return $array[$random] .' et ' . (count($array) -1) . " autres personnes ont aimé cette publication.";
+    } 
 }
-
-// Créer la data qui permet de tester la méthode
-
-// Tester la fonction
+// Créer la data (le array) qui permet de tester la méthode (de 0 à X users): 
+$users = ['Vivi', 'Elvina', 'Robin','Paul', 'Paul', 'Tony', 'Jenny'];  // & -> SELECT * FROM user; array[]
+// Tester la fonction / la méthode : 
+echo getLike($users); 
